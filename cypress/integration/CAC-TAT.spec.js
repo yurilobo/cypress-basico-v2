@@ -9,10 +9,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
     it.only('preenche os campos obrigatórios e envia o formulário', function() {
+        const longText='Teste, teste, teste teste teste teste, teste , teste teste, teste, tesste, teste, teste, test ,test, Teste, teste, teste teste teste teste, teste , teste teste, teste, tesste, teste, teste, test ,test, Teste, teste, teste teste teste teste, teste , teste teste, teste, tesste, teste, teste, test ,test, Teste, teste, teste teste teste teste, teste , teste teste, teste, tesste, teste, teste, test ,test, Teste, teste, teste teste teste teste, teste , teste teste, teste, tesste, teste, teste, test ,test, Teste, teste, teste teste teste teste, teste , teste teste, teste, tesste, teste, teste, test ,test '    
+    
         cy.get('#firstName').type("Yuri")
         cy.get('#lastName').type("Lobo")
         cy.get('#email').type("yuri@exemplo.com")
-        cy.get('#open-text-area').type("Teste")
+        cy.get('#open-text-area').type(longText, { delay: 0 })
         cy.get("button[type='submit']").click()
 
         cy.get('.success').should('be.visible')
