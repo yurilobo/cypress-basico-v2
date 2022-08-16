@@ -49,8 +49,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type("yuri@xemplo.com").should('have.value', 'yuri@xemplo.com').clear().should('have.value', '')
         cy.get('#open-text-area').type('Teste').should('have.value', 'Teste').clear().should('have.value', '')
     })
-    it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios',function(){
+    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios',function(){
         cy.get("button[type='submit']").click()
         cy.get('.error').should('be.visible')
+    })
+    it.only('envia o formuário com sucesso usando um comando customizado',function(){
+        cy.fillMandatoryFieldsAndSubmit()
+        cy.get('.success').should('be.visible')
     })
   })
