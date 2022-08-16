@@ -30,7 +30,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('be.visible')
 
     })
-    it.only('campo de telefone continua vazio quando preenchido por caracter não numerico',function(){
+    it('campo de telefone continua vazio quando preenchido por caracter não numerico',function(){
         cy.get('#phone').type('ksnclamk').should('have.value','')
+    })
+    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulári',function(){
+        cy.get('#firstName').type("Yuri")
+        cy.get('#lastName').type("Lobo")
+        cy.get('#email').type("yuri@xemplo.com")
+        cy.get('#phone-checkbox').click()
+        cy.get('#open-text-area').type('Teste')
+        cy.get("button[type='submit']").click()
+
+        cy.get('.error').should('be.visible')
     })
   })
