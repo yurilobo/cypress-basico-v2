@@ -1,5 +1,6 @@
 // CAC-TAT.spec.js created with Cypress
 /// <reference types="Cypress" />
+
 describe('Central de Atendimento ao Cliente TAT', function() {
     beforeEach(function(){
         cy.visit('./src/index.html')
@@ -67,8 +68,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#product').select(1).should('have.value', 'blog')
     })
     it.only('marca cada tipo de atendimento',function(){
-        cy.get('input[type="radio"][value="ajuda"]').check().should('have.value', 'ajuda')
-        cy.get('input[type="radio"][value="elogio"]').check().should('have.value', 'elogio')
-        cy.get('input[type="radio"][value="feedback"]').check().should('have.value', 'feedback')
+        cy.get('input[type="radio"]')
+            .should('have.length', 3)
+            .each(function($radio){
+                cy.wrap($radio).check()
+                cy.wrap($radio).should('be.checked')
+            })
     })
   })
