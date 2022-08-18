@@ -75,7 +75,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
                 cy.wrap($radio).should('be.checked')
             })
     })
-    it.only('marca ambos checkboxes, depois desmarca o últimoo',function(){
+    it('marca ambos checkboxes, depois desmarca o últimoo',function(){
         cy.get('input[type="checkbox"]')
             .check()
             .should('be.checked')
@@ -83,5 +83,13 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .uncheck()
             .should('not.be.checked')
         
+    })
+    it.only(' seleciona um arquivo da pasta fixtures',function(){
+        cy.get('input[type="file"]')
+            .should('not.have.value')
+            .selectFile('cypress/fixtures/example.json')
+            .should(function($input){
+                expect($input[0].files[0].name).to.be.equal('example.json')
+            })
     })
   })
